@@ -10,15 +10,17 @@
 
 <body>
     <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-16">
+        <!-- Header -->
         <div class="px-4 py-2">
             <h1 class="text-gray-800 font-bold text-2xl uppercase">{{ isset($taskview) ? 'Edit Task' : 'Add Task' }}</h1>
         </div>
+
+        <!-- Form -->
         <form action="{{ isset($taskview) ? route('todo.update', $taskview->id) : route('todo.add') }}" method="POST" class="w-full max-w-sm mx-auto px-4 py-2">
             @csrf
             @if(isset($taskview))
             @method('PUT')
             @endif
-
             <div class="flex items-center border-b-2 border-teal-500 py-2">
                 <input
                     class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
@@ -47,7 +49,9 @@
             </div>
         </form>
 
+
         <ul class="divide-y divide-gray-200 px-4 mt-12">
+            <!-- Filter -->
             <div class="flex justify-center space-x-4 mb-8">
                 @php
                 $status = request()->query('status');
@@ -68,6 +72,7 @@
                 </form>
             </div>
 
+            <!-- List Task -->
             @foreach($listtask as $item)
             <li class="py-4">
                 <div class="flex items-center justify-between">
@@ -123,9 +128,10 @@
             </li>
             @endforeach
         </ul>
-        <button tyoe></button>
     </div>
 
+
+    <!-- Success Alert -->
     @if(session('success'))
     <div x-data="{ isOpen: true }" x-init="setTimeout(() => isOpen = false, 3000)">
         <div
@@ -173,5 +179,4 @@
     </div>
     @endif
 </body>
-
 </html>
