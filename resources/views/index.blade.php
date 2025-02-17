@@ -82,14 +82,15 @@
                             <input name="status" type="checkbox" onchange="this.form.submit()" {{ $item->is_done == 1 ? 'checked' : '' }}
                                 class="h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 rounded">
                         </form>
-                        <label class="ml-3 text-gray-900">
+                        <label class="ml-6 text-gray-900">
                             <span :class="checked ? 'line-through text-gray-400' : ''" class="text-lg font-medium">
                                 {{ $item->name }}
                             </span>
                             <span class="text-sm font-light text-gray-500 block">{{ isset($item->tanggal) ? $item->tanggal : '' }}</span>
                         </label>
                     </div>
-                    <div class="flex space-x-2 ml-auto">
+                    <div class="flex space-x-2 ml-12">
+                        @if($item->is_done == 0)
                         <form action="{{ route('todo.edit', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             <button type="submit" title="Edit">
@@ -101,6 +102,7 @@
                                 </svg>
                             </button>
                         </form>
+                        @endif
                         <form action="{{ route('todo.delete', ['id' => $item->id]) }}" method="post">
                             @csrf
                             @method('DELETE')

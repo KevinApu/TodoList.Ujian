@@ -23,7 +23,7 @@ class TaskRequest extends FormRequest
     {
         return [
             'task' => 'required|string|max:255',
-            'priority' => 'required|integer',
+            'priority' => 'required|in:1,2,3,4,5',
         ];
     }
 }
